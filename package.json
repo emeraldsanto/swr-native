@@ -1,6 +1,6 @@
 {
   "name": "swr-native",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SWR provider for React Native",
   "main": "src/index.tsx",
   "repository": "https://github.com/emeraldsanto/swr-native.git",

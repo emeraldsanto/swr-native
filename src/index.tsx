@@ -5,19 +5,19 @@ import { useCallback } from 'react';
 import type { AppStateStatus } from 'react-native';
 import { AppState } from 'react-native';
 import { SWRConfig } from 'swr';
-import type { ProviderConfiguration, PublicConfiguration } from 'swr/dist/types';
 
 type SWRConfigProps = ComponentProps<typeof SWRConfig>;
+type SWRConfigValue = NonNullable<SWRConfigProps['value']>;
 
 export function NativeSWRConfig(props: SWRConfigProps) {
   const net = useNetInfo();
 
-  const isOnline = useCallback<PublicConfiguration['isOnline']>(
+  const isOnline = useCallback<NonNullable<SWRConfigValue['isOnline']>>(
     () => net.isInternetReachable ?? false,
     [net.isInternetReachable]
   );
 
-  const initFocus = useCallback<ProviderConfiguration['initFocus']>((callback) => {
+  const initFocus = useCallback<NonNullable<SWRConfigValue['initFocus']>>((callback) => {
     let { currentState } = AppState
 
     const onAppStateChange = (nextAppState: AppStateStatus) => {
@@ -34,7 +34,7 @@ export function NativeSWRConfig(props: SWRConfigProps) {
     return () => subscription.remove();
   }, []);
 
-  const initReconnect = useCallback<ProviderConfiguration['initReconnect']>((callback) => {
+  const initReconnect = useCallback<NonNullable<SWRConfigValue['initReconnect']>>((callback) => {
     let { isInternetReachable } = net;
 
     const onNetInfoChange = (nextState: NetInfoState) => {
